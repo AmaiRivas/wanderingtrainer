@@ -9,12 +9,11 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
 	<head>
+		<title>{title}</title>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content="This webpage is a tool for Teamfight Tactics (TFT) players to optimize synergy combinations using spatula items and wandering trainers for stronger team compositions." />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
 	</head>
 	<body>
 		<slot />
