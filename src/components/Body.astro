@@ -1,0 +1,138 @@
+---
+const comps = [
+  { id: 1, name: 'Comp 1 de muchos Arcanas', synergy: 'arcana' },
+  { id: 2, name: 'Comp 2 de muchos Chronos', synergy: 'chrono' }
+]
+
+const synergies = [
+  { id: 1, value: 'arcana', label: 'Arcana', image: 'public/img/TFT12_Arcana_w.svg' },
+  { id: 2, value: 'chrono', label: 'Chrono', image: 'public/img/TFT12_Chrono_w.svg' },
+  { id: 3, value: 'dragon', label: 'Dragon', image: 'public/img/TFT12_Dragon_w.svg' },
+  { id: 4, value: 'eldritch', label: 'Eldritch', image: 'public/img/TFT12_Eldritch_w.svg' },
+]
+---
+
+<script src="/scripts/filter.js" type="module"></script>
+
+<main>
+  <section class="main-section">
+    <h1>Wandering Trainer</h1>
+    <div class="main-filters">
+      {Array.from({ length: 1 }).map((_, index) => (
+        <div class="main-filter-item">
+          <label for={`synergy-select-${index}`}>Choose a Synergy {index + 1}:</label>
+          <div class="custom-select">
+            <div class="selected-option" id="selected-option-container">
+              <span id="selected-label">None</span>
+            </div>
+            <div class="options-container">
+              <div class="option" data-value="">
+                <span>None</span>
+              </div>
+              {synergies.map(synergy => (
+                <div class="option" data-value={synergy.value}>
+                  <img src={synergy.image} alt={synergy.label} />
+                  <span>{synergy.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="main-selectors"></div>
+    <div class="main-compositions">
+      <h2>Comps</h2>
+      <ul id="item-list">
+        {comps.map(comp => (
+          <li class="item" data-category={comp.synergy}>{comp.name}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</main>
+
+<style>
+  main {
+    color: white;
+  }
+
+  .main-section {
+    margin: 100px 250px;
+  }
+
+  .main-filters {
+    display: flex;
+    gap: 20px;
+  }
+
+  .main-filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    label {
+      display: block;
+      font-size: small;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #e0e0e0;
+    }
+  }
+
+  .custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-height: 39px;
+  }
+
+  .selected-option {
+    display: flex;
+    align-items: center;
+    background-color: #1b2b44;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid #1b2b44;
+    color: #e0e0e0;
+    cursor: pointer;
+  }
+
+  .selected-option img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .options-container {
+    display: none;
+    position: absolute;
+    background-color: #1b2b44;
+    border: 1px solid #1b2b44;
+    border-radius: 0.375rem;
+    margin-top: 5px;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .options-container .option {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .options-container .option img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
+
+  .options-container .option:hover {
+    background-color: #334f7a;
+  }
+
+  .custom-select.open .options-container {
+    display: block;
+  }
+</style>
