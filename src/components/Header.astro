@@ -1,0 +1,45 @@
+<header class="main-header">
+  <a class="logo">
+    <img src="https://rerollcdn.com/brand.svg" alt="Main Logo">
+  </a>
+  <nav class="header-nav">
+    <ul>
+      <li><a href="Inicio">Home</a></li>
+      <li><a href="Inicio">About Us</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    color: white;
+    position: relative;
+    background-color: #0d202b;
+  }
+
+  .header-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  .logo {
+    margin-left: 20px;
+    
+    img {
+      height: 20px;
+    }
+  }
+</style>
