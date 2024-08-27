@@ -1,0 +1,73 @@
+---
+import { champions } from '../data/champions.ts';
+
+const compositions = [
+  {
+    name: 'Composition 1',
+    champions: champions
+  }
+];
+---
+
+<div id="composition-container">
+  {compositions.map((composition) => (
+    <div class="composition">
+      <h3>{composition.name}</h3>
+      <div class="champions-container">
+      {composition.champions.map((champion) => (
+        <div class="champion">
+          <img src={champion.image} alt={champion.name} />
+          <p>{champion.name}</p>
+        </div>
+      ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .composition {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #102531;
+    border: 2px solid #1e465d;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+
+  .composition h3 {
+    padding-left: 50px;
+  }
+
+  .champions-container {
+    display: flex;
+    gap: 15px;
+  }
+
+  .champion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    img {
+      width: 55px;
+      height: 55px;
+      border: 1px solid #000;
+      border-radius: 8px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #88a0a7;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 55px;
+    }
+  }
+
+</style>

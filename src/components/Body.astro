@@ -1,14 +1,16 @@
 ---
+import Composition from "./Composition.astro"
+
 const comps = [
   { id: 1, name: 'Comp 1 de muchos Arcanas', synergy: 'arcana' },
   { id: 2, name: 'Comp 2 de muchos Chronos', synergy: 'chrono' }
 ]
 
 const synergies = [
-  { id: 1, value: 'arcana', label: 'Arcana', image: 'public/img/TFT12_Arcana_w.svg' },
-  { id: 2, value: 'chrono', label: 'Chrono', image: 'public/img/TFT12_Chrono_w.svg' },
-  { id: 3, value: 'dragon', label: 'Dragon', image: 'public/img/TFT12_Dragon_w.svg' },
-  { id: 4, value: 'eldritch', label: 'Eldritch', image: 'public/img/TFT12_Eldritch_w.svg' },
+  { id: 1, value: 'arcana', label: 'Arcana', image: '/img/TFT12_Arcana_w.svg' },
+  { id: 2, value: 'chrono', label: 'Chrono', image: '/img/TFT12_Chrono_w.svg' },
+  { id: 3, value: 'dragon', label: 'Dragon', image: '/img/TFT12_Dragon_w.svg' },
+  { id: 4, value: 'eldritch', label: 'Eldritch', image: '/img/TFT12_Eldritch_w.svg' },
 ]
 ---
 
@@ -43,6 +45,7 @@ const synergies = [
     <div class="main-selectors"></div>
     <div class="main-compositions">
       <h2>Comps</h2>
+      <Composition></Composition>
       <ul id="item-list">
         {comps.map(comp => (
           <li class="item" data-category={comp.synergy}>{comp.name}</li>

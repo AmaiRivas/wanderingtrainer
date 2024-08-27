@@ -15,8 +15,6 @@
       "@sections/*": [
         "src/sections/*"
       ]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    }
   }
 }
