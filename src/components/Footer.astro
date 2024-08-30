@@ -1,3 +1,62 @@
+---
+type Creator = {
+  link: string;
+  name: string;
+};
+
+const creators: Creator[] = [
+  { link: "https://www.linkedin.com/in/amairivas", name: "@amaririvas" },
+  { link: "https://www.linkedin.com/in/narcisrossello", name: "@narcisrossello" },
+];
+
+function shuffleArray(array: Creator[]): Creator[] {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+const shuffledCreators = shuffleArray(creators);
+
+const currentYear = new Date().getFullYear();
+---
+
 <footer>
-  Footer
+  <div class="footer-content">
+    <p class="text-sm">&copy; {currentYear} Tube Inc. All rights reserved.</p>
+    <p class="text-xs">
+      Built by{" "}
+      {shuffledCreators.map((creator, index) => (
+        <>
+          {index > 0 && index === shuffledCreators.length - 1 ? ' and ' : index > 0 ? ', ' : ''}
+          <a href={creator.link} class="underline" target="_blank">{creator.name}</a>
+        </>
+      ))}
+    </p>
+  </div>
 </footer>
+
+<style>
+  footer {
+    color: white;
+    padding: 1rem 0;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+  }
+
+  .text-xs {
+    font-size: 0.75rem;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+</style>
