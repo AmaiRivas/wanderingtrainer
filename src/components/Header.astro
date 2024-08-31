@@ -1,45 +1,193 @@
-<header class="main-header">
-  <a class="logo" href="#">
-    <img src="/public/logo.webp" alt="Main Logo Wandering Trainer Page">
+---
+import SupportIcon from "./SupportIcon.astro";
+---
+
+<header>
+  <a class="logo" href="/">
+    <img src="/logo.webp" alt="Main Logo Wandering Trainer Page">
+    <span>Wandering Trainer</span>
   </a>
-  <nav class="header-nav">
-    <ul>
-      <li><a href="Inicio">Home</a></li>
-      <li><a href="Inicio">About Us</a></li>
-    </ul>
-  </nav>
+  <div class="actions">
+    <button class="button-icon" id="openDialog" aria-label="Open help modal">
+      <SupportIcon class="icon" />
+    </button>
+  </div>
+  <div class="dialog" id="dialog" style="display: none;">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2>Help &amp; Instructions</h2>
+      </div>
+      <div class="dialog-body">
+        <div class="section">
+          <h3 class="section-title">Getting Started</h3>
+          <p>Welcome to our platform! Here's how you can get started:</p>
+          <ul>
+            <li><strong>Create an account:</strong> Sign up to access all the features.</li>
+            <li><strong>Explore the dashboard:</strong> Navigate through the different sections to manage your data.</li>
+            <li><strong>Customize your settings:</strong> Adjust your preferences to personalize your experience.</li>
+          </ul>
+        </div>
+        <div class="section">
+          <h3 class="section-title">Support</h3>
+          <p>If you need any assistance, we're here to help:</p>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:support@acme.com">support@acme.com</a></li>
+            <li><strong>Phone:</strong> <a href="tel:1-800-555-1234">1-800-555-1234</a></li>
+            <li><strong>Documentation:</strong> <a href="#">Read our documentation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button id="closeDialog">Close</button>
+      </div>
+    </div>
+  </div>
 </header>
 
 <style>
-  .main-header {
+  header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    color: white;
-    position: relative;
-    background-color: #102531;
-  }
-
-  .header-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 20px;
-    }
+    background-color: var(--background-color); /* DEFINE CSS VARS */
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
   .logo {
+    display: flex;
     margin-left: 40px;
+    justify-content: space-between;
+    text-decoration: none;
+    align-items: center;
+    gap: 0.7rem;
+    color: white;
     
     img {
-      height: 50px;
+      height: 3rem;
+      width: 3rem;
+    }
+
+    span {
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      
+    }
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .button-ghot {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .button-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .button-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
+
+  .dialog {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .dialog-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    max-width: 600px;
+    width: 100%;
+
+    .dialog-header {
+      margin-bottom: 1rem;
+      h2 {
+        margin: 0;
+      }
+    }
+
+    .dialog-body {
+      .section {
+        margin-bottom: 1.5rem;
+
+        .section-title {
+          font-size: 1.125rem;
+          font-weight: 600;
+        }
+
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          margin-top: 0.5rem;
+
+          li {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .dialog-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 0.5rem 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const openDialogButton = document.getElementById('openDialog') as HTMLButtonElement;
+    const dialog = document.getElementById('dialog') as HTMLDivElement;
+    const closeDialogButton = document.getElementById('closeDialog') as HTMLButtonElement;
+
+    if (openDialogButton && dialog && closeDialogButton) {
+      openDialogButton.addEventListener('click', () => {
+        dialog.style.display = 'flex';
+      });
+
+      closeDialogButton.addEventListener('click', () => {
+        dialog.style.display = 'none';
+      });
+    }
+  });
+</script>
