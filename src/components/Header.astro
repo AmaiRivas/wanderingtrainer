@@ -79,30 +79,45 @@ import SupportIcon from "./SupportIcon.astro";
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const openDialogButton = document.getElementById('openDialog') as HTMLButtonElement;
-    const dialog = document.getElementById('dialog') as HTMLDivElement;
+    const $dialog = document.getElementById('dialog') as HTMLDivElement;
     const $dialogContent = document.getElementById('dialog-content') as HTMLDivElement;
     const closeDialogButton = document.getElementById('closeDialog') as HTMLButtonElement;
 
-    if (openDialogButton && dialog && closeDialogButton) {
-      openDialogButton.addEventListener('click', () => {
-        dialog.style.display = 'flex';
+    if (openDialogButton && $dialog && closeDialogButton) {
+      openDialogButton.addEventListener('click', (event: MouseEvent) => {
+        $dialog.style.display = 'flex';
         $dialogContent.classList.add('is-open');
+        $dialog.classList.add('is-open');
         $dialogContent.classList.remove('is-closing');
         $dialogContent.style.display = 'flex';
+
+        // Usar un evento de captura para manejar clics fuera del diálogo
+        document.addEventListener('click', handleOutsideClick, true);
       });
 
-      closeDialogButton.addEventListener('click', () => {
-        // dialog.style.display = 'none';
+      closeDialogButton.addEventListener('click', (_: MouseEvent) => {
+        closeDialog();
+      });
+
+      function handleOutsideClick(event: MouseEvent) {
+        if (!$dialogContent.contains(event.target as Node)) {
+          closeDialog();
+        }
+      }
+
+      function closeDialog() {
         $dialogContent.classList.remove('is-open');
+        $dialog.classList.remove('is-open');
         $dialogContent.classList.add('is-closing');
 
         $dialogContent.addEventListener('animationend', () => {
           if ($dialogContent.classList.contains('is-closing')) {
             $dialogContent.style.display = 'none';
-            dialog.style.display = 'none';
+            $dialog.style.display = 'none';
+            document.removeEventListener('click', handleOutsideClick, true); // Elimina el event listener en la fase de captura
           }
         }, { once: true });
-      });
+      }
     }
   });
 </script>

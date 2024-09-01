@@ -28,7 +28,7 @@ const shuffledCreators = shuffleArray(creators);
           <h3 class="section-title">Contact</h3>
           <p>If you need any assistance, we're here to help:</p>
           <ul>
-            {shuffledCreators.map((creator, index) => (
+            {shuffledCreators.map((creator, _) => (
               <>
                 <li><strong>LinkedIn:</strong> <a href={creator.link} target="_blank">{creator.name}</a></li>
               </>
@@ -55,8 +55,13 @@ const shuffledCreators = shuffleArray(creators);
     width: 100%;
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0);
     z-index: 2000;
+    transition: background-color 0.3s ease;
+  }
+
+  dialog.is-open {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .dialog-content {
