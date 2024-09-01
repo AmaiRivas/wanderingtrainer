@@ -4,7 +4,7 @@ import { champions } from '../data/champions.ts';
 const compositions = [
   {
     name: 'Composition 1',
-    champions: champions
+    champions: champions.slice(0, 8)
   }
 ];
 ---
@@ -16,7 +16,7 @@ const compositions = [
       <div class="champions-container">
       {composition.champions.map((champion) => (
         <div class="champion">
-          <img src={champion.image} alt={champion.name} />
+          <img src={champion.image} alt={champion.name} loading="lazy" decoding="async"/>
           <p>{champion.name}</p>
         </div>
       ))}

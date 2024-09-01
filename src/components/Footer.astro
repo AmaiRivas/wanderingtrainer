@@ -1,13 +1,6 @@
 ---
-type Creator = {
-  link: string;
-  name: string;
-};
-
-const creators: Creator[] = [
-  { link: "https://www.linkedin.com/in/amairivas", name: "@amaririvas" },
-  { link: "https://www.linkedin.com/in/narcisrossello", name: "@narcisrossello" },
-];
+import type { Creator } from '../types/Creator';
+import { creators } from '../data/creators.ts';
 
 function shuffleArray(array: Creator[]): Creator[] {
   return array.sort(() => Math.random() - 0.5);

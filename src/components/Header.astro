@@ -1,45 +1,108 @@
-<header class="main-header">
-  <a class="logo" href="#">
+---
+import SupportDialog from "./SupportDialog.astro";
+import SupportIcon from "./SupportIcon.astro";
+---
+
+<header>
+  <a class="logo" href="/">
     <img src="/logo.webp" alt="Main Logo Wandering Trainer Page">
+    <span>Wandering Trainer</span>
   </a>
-  <nav class="header-nav">
-    <ul>
-      <li><a href="Inicio">Home</a></li>
-      <li><a href="Inicio">About Us</a></li>
-    </ul>
-  </nav>
+  <div class="actions">
+    <button class="button-icon" id="openDialog" aria-label="Open help modal">
+      <SupportIcon class="icon" />
+    </button>
+  </div>
+  <SupportDialog />
+  
 </header>
 
 <style>
-  .main-header {
+  header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    color: white;
-    position: relative;
-    background-color: #102531;
-  }
-
-  .header-nav {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 20px;
-    }
+    background-color: var(--background-color); /* DEFINE CSS VARS */
+    padding: 1rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   }
 
   .logo {
+    display: flex;
     margin-left: 40px;
+    justify-content: space-between;
+    text-decoration: none;
+    align-items: center;
+    gap: 0.7rem;
+    color: white;
     
     img {
-      height: 50px;
+      height: 3rem;
+      width: 3rem;
+    }
+
+    span {
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-decoration: none;
+      
     }
   }
+
+  .button-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .button-icon {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      .icon {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+    }
+  }
+
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const openDialogButton = document.getElementById('openDialog') as HTMLButtonElement;
+    const dialog = document.getElementById('dialog') as HTMLDivElement;
+    const $dialogContent = document.getElementById('dialog-content') as HTMLDivElement;
+    const closeDialogButton = document.getElementById('closeDialog') as HTMLButtonElement;
+
+    if (openDialogButton && dialog && closeDialogButton) {
+      openDialogButton.addEventListener('click', () => {
+        dialog.style.display = 'flex';
+        $dialogContent.classList.add('is-open');
+        $dialogContent.classList.remove('is-closing');
+        $dialogContent.style.display = 'flex';
+      });
+
+      closeDialogButton.addEventListener('click', () => {
+        // dialog.style.display = 'none';
+        $dialogContent.classList.remove('is-open');
+        $dialogContent.classList.add('is-closing');
+
+        $dialogContent.addEventListener('animationend', () => {
+          if ($dialogContent.classList.contains('is-closing')) {
+            $dialogContent.style.display = 'none';
+            dialog.style.display = 'none';
+          }
+        }, { once: true });
+      });
+    }
+  });
+</script>
