@@ -2,8 +2,8 @@
 import Composition from "./Composition.astro"
 
 const comps = [
-  { id: 1, name: 'Comp 1 de muchos Arcanas', synergy: 'arcana' },
-  { id: 2, name: 'Comp 2 de muchos Chronos', synergy: 'chrono' }
+  { id: 1, name: 'Comp 1 de muchos Arcanas', trait: 'arcana' },
+  { id: 2, name: 'Comp 2 de muchos Chronos', trait: 'chrono' }
 ]
 
 const synergies = [
@@ -22,7 +22,7 @@ const synergies = [
     <div class="main-filters">
       {Array.from({ length: 1 }).map((_, index) => (
         <div class="main-filter-item">
-          <label for={`synergy-select-${index}`}>Choose a Synergy {index + 1}:</label>
+          <label for={`synergy-select-${index}`}>Choose a Trait {index + 1}:</label>
           <div class="custom-select">
             <div class="selected-option" id="selected-option-container">
               <span id="selected-label">None</span>
@@ -48,7 +48,7 @@ const synergies = [
       <Composition></Composition>
       <ul id="item-list">
         {comps.map(comp => (
-          <li class="item" data-category={comp.synergy}>{comp.name}</li>
+          <li class="item" data-category={comp.trait}>{comp.name}</li>
         ))}
       </ul>
     </div>

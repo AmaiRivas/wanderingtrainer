@@ -1,3 +1,5 @@
+import { champions } from './test.js';
+
 const $ = selector => document.querySelector(selector);
 const $$ = selectorAll => document.querySelectorAll(selectorAll);
 
@@ -13,6 +15,7 @@ document.addEventListener('click', closeOptions);
 
 function toggleOptions() {
   $customSelect.classList.toggle('open');
+  compsGeneration();
 }
 
 function handleOptionSelection(event) {
@@ -51,4 +54,10 @@ function closeOptions(event) {
   if (!$customSelect.contains(event.target)) {
     $customSelect.classList.remove('open');
   }
+}
+
+function compsGeneration() {
+  champions.map(champ => (
+    console.log(champ.traits)
+  ))
 }
